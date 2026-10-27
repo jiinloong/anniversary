@@ -4,20 +4,20 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#f8eee6">
-  <title>A Little Scrapbook for You ♡</title>
+  <title>one year ouuhhhhhh one whole year ouuuhhhhhhh ayyyyyy november 28th ayyyyy</title>
   <style>
     :root {
-      --paper: #fffaf2;
+      --paper: #E3EDBB;
       --paper-deep: #f6e8d9;
       --ink: #55443f;
       --muted: #8a7169;
-      --rose: #d88e91;
-      --rose-dark: #a95766;
+      --rose: #ED1128;
+      --rose-dark: #700206;
       --sage: #a9b8a0;
       --line: #e8d6c8;
       --shadow: 0 12px 30px rgba(104, 69, 57, .10);
     }
-* { box-sizing: border-box; }
+    * { box-sizing: border-box; }
     body {
       margin: 0;
       color: var(--ink);
@@ -103,4 +103,280 @@
       .manual .btn { width: 100%; }
       .tape { top: 4px; }
     }
+    @media print {
+      body { background: white; }
+      .page { width: 100%; margin: 0; }
+      .paper { box-shadow: none; border: none; }
+      .paper:before, .tape, header, .section:not(.print-section), #scannerPanel, #reveal, .footer { display: none !important; }
+      details { display: block !important; border: none; padding: 0; margin: 0; }
+      details > summary, details > p, details > .controls { display: none !important; }
+      #barcodePrint { display: grid !important; }
+      #barcodePrint .barcode-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <section class="paper">
+      <div class="tape" aria-hidden="true"></div>
+      <header class="center">
+        <div class="eyebrow">a tiny corner of the internet · made for you</div>
+        <h1>A Little<br>Scrapbook <span class="heart">♡</span></h1>
+        <p class="subtitle">Four little things, each with a reason. Scan a gift's barcode to open its page, and take your time reading.</p>
+        <span class="sticker">made with love & a suspicious amount of effort</span>
+      </header>
 
+      <section class="section panel" id="scannerPanel">
+        <div class="center">
+          <div class="eyebrow">the little scanner</div>
+          <h2>Which gift did you find?</h2>
+          <p class="subtitle">allow the website to access your camera pllsssss</p>
+          <div class="controls">
+            <button class="btn" id="startScan" type="button">open camera</button>
+            <button class="btn secondary" id="stopScan" type="button" disabled>stop camera</button>
+          </div>
+          <video id="video" muted playsinline></video>
+          <p class="status" id="status" role="status" aria-live="polite">Ready when you are.</p>
+          <p class="tiny">Camera scanning needs permission and a secure HTTPS website. If it doesn't work, type the code below instead.</p>
+          <form class="manual" id="manualForm">
+            <input id="manualCode" autocomplete="off" autocapitalize="characters" placeholder="Enter gift code, e.g. GIFT-01" aria-label="Gift barcode code">
+            <button class="btn secondary" type="submit">Open gift</button>
+          </form>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="center">
+          <div class="eyebrow">four little surprises</div>
+          <h2>Pick a page to begin</h2>
+          <p class="subtitle">You can scan the real tag, or tap a page here to preview it.</p>
+        </div>
+        <div class="gift-grid" id="giftGrid"></div>
+      </section>
+
+      <section class="section panel reveal" id="reveal" aria-live="polite">
+        <div class="eyebrow">a page just for you</div>
+        <div class="reveal-layout">
+          <div class="photo-wrap">
+            <img id="giftImage" src="" alt="Decorative picture for this gift">
+            <div class="photo-caption" id="imageCaption">a little memory</div>
+          </div>
+          <div>
+            <span class="tag" id="giftTag">GIFT 01</span>
+            <h2 id="giftTitle">A little something</h2>
+            <p id="giftIntro"></p>
+            <div class="letter" id="giftMessage"></div>
+            <p class="tiny" id="giftAfter"></p>
+            <button class="btn secondary" id="backToGifts" type="button">Back to the four pages</button>
+          </div>
+        </div>
+      </section>
+
+      <details>
+       
+        <p class="tiny">Print these tags and attach one to each wrapped gift. The printed code must match the code shown below it. Keep the black bars clear, flat, and large enough for a phone camera.</p>
+        <div class="controls">
+          <button class="btn sage" id="printBarcodes" type="button">Print barcode tags</button>
+        </div>
+        <div class="barcode-grid" id="barcodePrint"></div>
+      </details>
+      <p class="footer"> <span class="heart"> </span> </p>
+    </section>
+  </main>
+
+  <script src="https://unpkg.com/@zxing/browser@0.1.5/umd/index.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.6/dist/JsBarcode.all.min.js"></script>
+  <script>
+    /*
+      PERSONALISE THIS SECTION:
+      Change each title, intro, message, after-note, image URL, and caption.
+      Keep the four codes as GIFT-01, GIFT-02, GIFT-03, and GIFT-04 unless
+      you also change the codes printed on the gift tags.
+      The sample text is only a placeholder—make it sound like you.
+    */
+    const gifts = [
+      {
+        code: "GIFT-01",
+        label: "Gift one",
+        title: "A little reminder",
+        intro: "For the days when you need a small reason to smile.",
+        message: "I chose this because it made me think of you. I wanted you to have something that could remind you that someone is always cheering for you, even on ordinary days.\n\nYou don't have to do anything special to deserve that. I'm glad I get to be part of your life.",
+        after: "P.S. This is only page one. There are three more little surprises.",
+        caption: "little things can mean a lot",
+        image: "https://images.unsplash.com/photo-1513364776144-60967b0f800f?auto=format&fit=crop&w=900&q=85"
+      },
+      {
+        code: "GIFT-02",
+        label: "Gift two",
+        title: "Because this felt like you",
+        intro: "Some gifts are chosen for a reason that is hard to explain in one sentence.",
+        message: "I picked this because of the little things I notice about you. It's not about it being perfect or expensive. I just wanted to find something and think, 'yeah, this feels like something she'd like.'\n\nI hope it makes you happy whenever you see it.",
+        after: "You deserve thoughtful things, not just on special days.",
+        caption: "picked with you in mind",
+        image: "https://images.unsplash.com/photo-1513519245088-0e12902e5a38?auto=format&fit=crop&w=900&q=85"
+      },
+      {
+        code: "GIFT-03",
+        label: "Gift three",
+        title: "A small piece of us",
+        intro: "This one is about the time we've spent together—and the time still ahead.",
+        message: "Ten months with you has given me so many little moments to keep. Even when a day is boring, or things don't go perfectly, I'm still happy that you're the person I get to talk to and learn more about.\n\nI don't need every moment to be extraordinary. I just want more chances to make ordinary moments special with you.",
+        after: "One day at a time, one memory at a time. ♡",
+        caption: "one page in a much bigger story",
+        image: "https://images.unsplash.com/photo-1455390582262-044cdead277a?auto=format&fit=crop&w=900&q=85"
+      },
+      {
+        code: "GIFT-04",
+        label: "Gift four",
+        title: "The last little surprise",
+        intro: "Last gift, but definitely not the last thing I want to tell you.",
+        message: "I wanted this anniversary to feel like I put real thought into it, because you matter to me. Thank you for the laughs, the conversations, the comfort, and all the little moments that might seem ordinary but mean a lot to me.\n\nI'm still learning how to be a good boyfriend, and I know I won't get everything right. But I care about you, and I want to keep showing that through the way I treat you.",
+        after: "Happy anniversary, my love. Here's to the next chapter. ♡",
+        caption: "to be continued...",
+        image: "https://images.unsplash.com/photo-1511988617509-a57c8a288659?auto=format&fit=crop&w=900&q=85"
+      }
+    ];
+
+    const $ = (id) => document.getElementById(id);
+    const grid = $("giftGrid");
+    const barcodePrint = $("barcodePrint");
+    const reveal = $("reveal");
+    const video = $("video");
+    let scannerControls = null;
+    let reader = null;
+    let scanLocked = false;
+
+    function renderGiftTiles() {
+      grid.innerHTML = "";
+      gifts.forEach((gift, index) => {
+        const tile = document.createElement("article");
+        tile.className = "gift-tile";
+        const number = document.createElement("div");
+        number.className = "gift-number";
+        number.textContent = "PAGE " + String(index + 1).padStart(2, "0");
+        const title = document.createElement("h3");
+        title.textContent = gift.label;
+        const description = document.createElement("p");
+        description.textContent = "A small surprise is waiting inside.";
+        const button = document.createElement("button");
+        button.type = "button";
+        button.className = "btn secondary";
+        button.textContent = "Open this page ♡";
+        button.addEventListener("click", () => openGift(gift.code));
+        tile.append(number, title, description, button);
+        grid.appendChild(tile);
+      });
+    }
+
+    function renderBarcodes() {
+      barcodePrint.innerHTML = "";
+      gifts.forEach((gift) => {
+        const card = document.createElement("div");
+        card.className = "barcode-card";
+        const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+        const label = document.createElement("strong");
+        label.textContent = gift.label + " · " + gift.code;
+        card.append(svg, label);
+        barcodePrint.appendChild(card);
+        try {
+          JsBarcode(svg, gift.code, { format: "CODE128", lineColor: "#171312", background: "#ffffff", width: 2, height: 65, margin: 8, displayValue: false });
+        } catch (error) {
+          svg.replaceWith(document.createTextNode("Barcode couldn't be generated. Check the JsBarcode connection."));
+        }
+      });
+    }
+
+    function openGift(rawCode) {
+      const code = String(rawCode || "").trim().toUpperCase();
+      const gift = gifts.find(item => item.code.toUpperCase() === code);
+      if (!gift) {
+        $("status").textContent = "That code wasn't recognised. Check the tag and try again (e.g. GIFT-01).";
+        return;
+      }
+      stopScanner(false);
+      $("giftTag").textContent = gift.label.toUpperCase() + " · " + gift.code;
+      $("giftTitle").textContent = gift.title;
+      $("giftIntro").textContent = gift.intro;
+      $("giftMessage").textContent = gift.message;
+      $("giftAfter").textContent = gift.after;
+      $("giftImage").src = gift.image;
+      $("giftImage").alt = "Decorative picture: " + gift.caption;
+      $("imageCaption").textContent = gift.caption;
+      reveal.classList.add("visible");
+      reveal.scrollIntoView({ behavior: "smooth", block: "start" });
+      $("status").textContent = "Opened " + gift.label + ". ♡";
+    }
+
+    function stopScanner(updateStatus = true) {
+      if (scannerControls) {
+        try { scannerControls.stop(); } catch (_) {}
+        scannerControls = null;
+      }
+      if (video.srcObject) {
+        video.srcObject.getTracks().forEach(track => track.stop());
+        video.srcObject = null;
+      }
+      video.style.display = "none";
+      $("startScan").disabled = false;
+      $("stopScan").disabled = true;
+      scanLocked = false;
+      if (updateStatus) $("status").textContent = "Camera stopped. You can scan again or type a code.";
+    }
+
+    async function startScanner() {
+      if (!window.isSecureContext) {
+        $("status").textContent = "Camera access requires HTTPS. Publish with GitHub Pages, then open the https:// address on your phone.";
+        return;
+      }
+      if (!window.ZXingBrowser || !window.ZXingBrowser.BrowserMultiFormatReader) {
+        $("status").textContent = "The scanner library didn't load. Check your internet connection, or use manual code entry.";
+        return;
+      }
+      try {
+        $("startScan").disabled = true;
+        $("stopScan").disabled = false;
+        $("status").textContent = "Requesting camera permission…";
+        video.style.display = "block";
+        reader = new ZXingBrowser.BrowserMultiFormatReader();
+        scannerControls = await reader.decodeFromVideoDevice(
+          undefined,
+          video,
+          (result, error, controls) => {
+            if (result && !scanLocked) {
+              scanLocked = true;
+              const scanned = result.getText();
+              $("manualCode").value = scanned;
+              $("status").textContent = "Found code: " + scanned;
+              controls.stop();
+              scannerControls = null;
+              openGift(scanned);
+            }
+          }
+        );
+        $("status").textContent = "Camera is on. Hold a gift barcode steady in view.";
+      } catch (error) {
+        stopScanner(false);
+        let message = "Couldn't start the camera. Check browser permissions and try again.";
+        if (error && (error.name === "NotAllowedError" || error.name === "PermissionDeniedError")) message = "Camera permission was denied. Allow camera access in your browser settings, or type the code manually.";
+        else if (error && error.name === "NotFoundError") message = "No camera was found on this device. Use manual code entry instead.";
+        $("status").textContent = message;
+      }
+    }
+
+    $("startScan").addEventListener("click", startScanner);
+    $("stopScan").addEventListener("click", () => stopScanner());
+    $("manualForm").addEventListener("submit", (event) => {
+      event.preventDefault();
+      openGift($("manualCode").value);
+    });
+    $("backToGifts").addEventListener("click", () => {
+      reveal.classList.remove("visible");
+      $("scannerPanel").scrollIntoView({ behavior: "smooth", block: "start" });
+    });
+    $("printBarcodes").addEventListener("click", () => window.print());
+
+    renderGiftTiles();
+    renderBarcodes();
+  </script>
+</body>
+</html>
