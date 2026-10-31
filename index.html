@@ -120,7 +120,7 @@
     <section class="paper">
       <div class="tape" aria-hidden="true"></div>
       <header class="center">
-        <div class="eyebrow">a tiny corner of the internet · made for you</div>
+        <div class="eyebrow">from your boat, to his goat</div>
         <h1>HAPPY ONE<br>YEAR ANNIVERSARY<span class="heart"> </span></h1>
         <p class="subtitle">scan the little barcode on each gift</p>
         <span class="sticker">love you lots btw</span>
@@ -146,15 +146,6 @@
       </section>
 
       <section class="section">
-        <div class="center">
-          <div class="eyebrow">four little surprises</div>
-          <h2>Pick a page to begin</h2>
-          <p class="subtitle">You can scan the real tag, or tap a page here to preview it.</p>
-        </div>
-        <div class="gift-grid" id="giftGrid"></div>
-      </section>
-
-      <section class="section panel reveal" id="reveal" aria-live="polite">
         <div class="eyebrow">a page just for you</div>
         <div class="reveal-layout">
           <div class="photo-wrap">
@@ -197,43 +188,43 @@
     const gifts = [
       {
         code: "GIFT-01",
-        label: "Gift one",
-        title: "A little reminder",
-        intro: "For the days when you need a small reason to smile.",
-        message: "I chose this because it made me think of you. I wanted you to have something that could remind you that someone is always cheering for you, even on ordinary days.\n\nYou don't have to do anything special to deserve that. I'm glad I get to be part of your life.",
-        after: "P.S. This is only page one. There are three more little surprises.",
-        caption: "little things can mean a lot",
-        image: "https://images.unsplash.com/photo-1513364776144-60967b0f800f?auto=format&fit=crop&w=900&q=85"
+        label: "",
+        title: "",
+        intro: "",
+        message: "",
+        after: "",
+        caption: "",
+        image: ""
       },
       {
         code: "GIFT-02",
-        label: "Gift two",
-        title: "Because this felt like you",
-        intro: "Some gifts are chosen for a reason that is hard to explain in one sentence.",
-        message: "I picked this because of the little things I notice about you. It's not about it being perfect or expensive. I just wanted to find something and think, 'yeah, this feels like something she'd like.'\n\nI hope it makes you happy whenever you see it.",
-        after: "You deserve thoughtful things, not just on special days.",
-        caption: "picked with you in mind",
-        image: "https://images.unsplash.com/photo-1513519245088-0e12902e5a38?auto=format&fit=crop&w=900&q=85"
+        label: "",
+        title: "",
+        intro: "",
+        message: "",
+        after: "",
+        caption: "",
+        image: ""
       },
       {
         code: "GIFT-03",
-        label: "Gift three",
-        title: "A small piece of us",
-        intro: "This one is about the time we've spent together—and the time still ahead.",
-        message: "Ten months with you has given me so many little moments to keep. Even when a day is boring, or things don't go perfectly, I'm still happy that you're the person I get to talk to and learn more about.\n\nI don't need every moment to be extraordinary. I just want more chances to make ordinary moments special with you.",
-        after: "One day at a time, one memory at a time. ♡",
-        caption: "one page in a much bigger story",
-        image: "https://images.unsplash.com/photo-1455390582262-044cdead277a?auto=format&fit=crop&w=900&q=85"
+        label: "",
+        title: "",
+        intro: "",
+        message: "T",
+        after: "",
+        caption: "",
+        image: ""
       },
       {
         code: "GIFT-04",
-        label: "Gift four",
-        title: "The last little surprise",
-        intro: "Last gift, but definitely not the last thing I want to tell you.",
-        message: "I wanted this anniversary to feel like I put real thought into it, because you matter to me. Thank you for the laughs, the conversations, the comfort, and all the little moments that might seem ordinary but mean a lot to me.\n\nI'm still learning how to be a good boyfriend, and I know I won't get everything right. But I care about you, and I want to keep showing that through the way I treat you.",
-        after: "Happy anniversary, my love. Here's to the next chapter. ♡",
-        caption: "to be continued...",
-        image: "https://images.unsplash.com/photo-1511988617509-a57c8a288659?auto=format&fit=crop&w=900&q=85"
+        label: "",
+        title: "",
+        intro: "",
+        message: "",
+        after: "",
+        caption: "",
+        image: ""
       }
     ];
 
@@ -353,12 +344,12 @@
             }
           }
         );
-        $("status").textContent = "Camera is on. Hold a gift barcode steady in view.";
+        $("status").textContent = "la camera is on now point it to the barcode";
       } catch (error) {
         stopScanner(false);
-        let message = "Couldn't start the camera. Check browser permissions and try again.";
-        if (error && (error.name === "NotAllowedError" || error.name === "PermissionDeniedError")) message = "Camera permission was denied. Allow camera access in your browser settings, or type the code manually.";
-        else if (error && error.name === "NotFoundError") message = "No camera was found on this device. Use manual code entry instead.";
+        let message = "the camera couldnt start could you check browser permissions?";
+        if (error && (error.name === "NotAllowedError" || error.name === "PermissionDeniedError")) message = "the camera permission was denied can you like check the permissions n stuff";
+        else if (error && error.name === "NotFoundError") message = "bro wheres ur camera i cant find it";
         $("status").textContent = message;
       }
     }
