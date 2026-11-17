@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="en">
+  <script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.6/dist/JsBarcode.all.min.js"></script>
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -141,6 +142,51 @@
   </style>
 </head>
 <body>
+  <section id="barcodeSection">
+  <h2>Our Gift Barcodes</h2>
+
+  <div class="barcode">
+    <svg id="barcode1"></svg>
+    <p>Gift 1</p>
+  </div>
+
+  <div class="barcode">
+    <svg id="barcode2"></svg>
+    <p>Gift 2</p>
+  </div>
+
+  <div class="barcode">
+    <svg id="barcode3"></svg>
+    <p>Gift 3</p>
+  </div>
+</section>
+
+<script>
+  window.addEventListener("load", function () {
+
+    JsBarcode("#barcode1", "GIFT-01", {
+      format: "CODE128",
+      width: 2,
+      height: 70,
+      displayValue: true
+    });
+
+    JsBarcode("#barcode2", "GIFT-02", {
+      format: "CODE128",
+      width: 2,
+      height: 70,
+      displayValue: true
+    });
+
+    JsBarcode("#barcode3", "GIFT-03", {
+      format: "CODE128",
+      width: 2,
+      height: 70,
+      displayValue: true
+    });
+
+  });
+</script>
   <main class="page">
     <section class="paper">
       <div class="tape" aria-hidden="true"></div>
