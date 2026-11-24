@@ -142,43 +142,26 @@
   </style>
 </head>
 <body>
-  <section id="barcodeSection">
-  <h2>Our Gift Barcodes</h2>
-
-  <div class="barcode">
-    <svg id="barcode1"></svg>
-    <p>Gift 1</p>
-  </div>
-
-  <div class="barcode">
-    <svg id="barcode2"></svg>
-    <p>Gift 2</p>
-  </div>
-
-  <div class="barcode">
-    <svg id="barcode3"></svg>
-    <p>Gift 3</p>
-  </div>
-</section>
+  
 
 <script>
   window.addEventListener("load", function () {
 
-    JsBarcode("#barcode1", "GIFT-01", {
+    JsBarcode("#barcode1", "the first oneee", {
       format: "CODE128",
       width: 2,
       height: 70,
       displayValue: true
     });
 
-    JsBarcode("#barcode2", "GIFT-02", {
+    JsBarcode("#barcode2", "second gift", {
       format: "CODE128",
       width: 2,
       height: 70,
       displayValue: true
     });
 
-    JsBarcode("#barcode3", "GIFT-03", {
+    JsBarcode("#barcode3", "FINAL", {
       format: "CODE128",
       width: 2,
       height: 70,
@@ -208,7 +191,7 @@
             <button class="btn secondary" id="stopScan" type="button" disabled>stop ittt cameraaa aha ahahah stop itt</button>
           </div>
           <video id="video" muted playsinline></video>
-          <p class="status" id="status" role="status" aria-live="polite">[SCANNER STATUS]</p>
+          <p class="status" id="status" role="status" aria-live="polite">this is the camera status where you see the cameras status</p>
         </div>
       </section>
 
@@ -219,12 +202,12 @@
       </section>
 
       <section class="section panel reveal" id="reveal" aria-live="polite">
-        <div class="eyebrow">[GIFT REVEAL SECTION LABEL]</div>
+        <div class="eyebrow">MISCELLANEOUS GIFTS</div>
         <div class="reveal-layout">
           <div class="photo-wrap">
             <div class="photo-placeholder" id="photoPlaceholder">[ADD A PHOTO URL IN THE GIFT SETTINGS BELOW]</div>
             <img id="giftImage" src="" alt="" hidden>
-            <div class="photo-caption" id="imageCaption">[PHOTO CAPTION]</div>
+            <div class="photo-caption" id="imageCaption"></div>
           </div>
           <div>
             <span class="tag" id="giftTag">[GIFT LABEL]</span>
@@ -232,7 +215,7 @@
             <p id="giftIntro">[GIFT INTRODUCTION]</p>
             <div class="letter" id="giftMessage">[GIFT MESSAGE]</div>
             <p class="tiny" id="giftAfter">[FINAL LITTLE NOTE]</p>
-            <button class="btn secondary" id="backToGifts" type="button">[BACK BUTTON]</button>
+            <button class="btn secondary" id="backToGifts" type="button">let me go baccckkkkk let me gooooo</button>
           </div>
         </div>
       </section>
@@ -266,23 +249,23 @@
     */
     const gifts = [
       {
-        code: "GIFT-01",
-        label: "[read this first!!]",
-        title: "[MISC]",
+        code: "number satu",
+        label: "read this first!!",
+        title: "MISC",
         intro: "[small stuff i got for you (with love) that dont fit into any single category]",
         message: "omgomg you opened the first one!!! i really hope youre enjoying everything so far, and i hope you enjoy the chocolate and charms!! i remember when you lost your snoopy croc charms in learning journey (probably when you tripped on the escalator haha) and you seemed to really love them so i thought id get you some!! and alsoo some timtams from australia that i REALLY wanted to use in the gift but i messed up (as you can see on the holes) i thought id make some kind of shopping bag with timtams as the handles but that didnt get too far, keep opening the gifts, love youu!!!",
-        after: "[GIFT 1 FINAL NOTE]",
-        caption: "[GIFT 1 PHOTO CAPTION]",
+        after: "get going next one gogogo",
+        caption: "ou shi",
         image: ""
       },
       {
-        code: "GIFT-02",
-        label: "[GIFT 2 LABEL]",
-        title: "[GIFT 2 TITLE]",
-        intro: "[GIFT 2 INTRODUCTION]",
-        message: "[GIFT 2 MESSAGE]",
-        after: "[GIFT 2 FINAL NOTE]",
-        caption: "[GIFT 2 PHOTO CAPTION]",
+        code: "gift two",
+        label: "second onneeee",
+        title: "huh whats that sound squeak squeak",
+        intro: "wait... dog toys???",
+        message: "squeak squeak omg wait you noticed my dog toys i remember when you told me that youd want me to get you some and even though i bought these awhile ago i CLEARLY remember being super worried that theyd be low quality or youd feel unsafe with your dogs having them so IF you do, you can keep them for yourself too!! if you feel unsafe with giving them to your dogs you DONT HAVE TO, and i know how much your dogs mean to you and im sososo glad you have them with you and thought they also deserved a gift for keeping you happy!!!(probably shouldve bought better ones though soso sorry)",
+        after: "lil co lil la lil fi sososoooo cute",
+        caption: "dunk on em",
         image: ""
       },
       {
