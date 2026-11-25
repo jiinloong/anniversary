@@ -147,21 +147,21 @@
 <script>
   window.addEventListener("load", function () {
 
-    JsBarcode("#barcode1", "the first oneee", {
+    JsBarcode("#barcode1", "GIFT-01", {
       format: "CODE128",
       width: 2,
       height: 70,
       displayValue: true
     });
 
-    JsBarcode("#barcode2", "second gift", {
+    JsBarcode("#barcode2", "GIFT-02", {
       format: "CODE128",
       width: 2,
       height: 70,
       displayValue: true
     });
 
-    JsBarcode("#barcode3", "FINAL", {
+    JsBarcode("#barcode3", "GIFT-03", {
       format: "CODE128",
       width: 2,
       height: 70,
@@ -249,7 +249,7 @@
     */
     const gifts = [
       {
-        code: "number satu",
+        code: "GIFT-01",
         label: "read this first!!",
         title: "MISC",
         intro: "[small stuff i got for you (with love) that dont fit into any single category]",
@@ -259,7 +259,7 @@
         image: ""
       },
       {
-        code: "gift two",
+        code: "GIFT-02",
         label: "second onneeee",
         title: "huh whats that sound squeak squeak",
         intro: "wait... dog toys???",
@@ -352,7 +352,7 @@
       const gift = gifts.find(item => item.code.toUpperCase() === code);
 
       if (!gift) {
-        $("status").textContent = "[CODE NOT RECOGNISED] " + code;
+        $("status").textContent = "if you see this go punch ur bf and tell him to go fix it" + code;
         return;
       }
 
@@ -377,7 +377,7 @@
 
       reveal.classList.add("visible");
       reveal.scrollIntoView({ behavior: "smooth", block: "start" });
-      $("status").textContent = "[GIFT OPENED] " + gift.code;
+      $("status").textContent = "gift... OPENED " + gift.code;
     }
 
     function stopScanner(updateStatus = true) {
