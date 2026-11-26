@@ -144,32 +144,6 @@
 <body>
   
 
-<script>
-  window.addEventListener("load", function () {
-
-    JsBarcode("#barcode1", "GIFT-01", {
-      format: "CODE128",
-      width: 2,
-      height: 70,
-      displayValue: true
-    });
-
-    JsBarcode("#barcode2", "GIFT-02", {
-      format: "CODE128",
-      width: 2,
-      height: 70,
-      displayValue: true
-    });
-
-    JsBarcode("#barcode3", "GIFT-03", {
-      format: "CODE128",
-      width: 2,
-      height: 70,
-      displayValue: true
-    });
-
-  });
-</script>
   <main class="page">
     <section class="paper">
       <div class="tape" aria-hidden="true"></div>
@@ -206,6 +180,7 @@
         <div class="reveal-layout">
           <div class="photo-wrap">
             <img id="giftImage" src="" alt="" hidden>
+            <div class="photo-placeholder" id="photoPlaceholder" hidden>your photo will appear here</div>
             <div class="photo-caption" id="imageCaption"></div>
           </div>
           <div>
@@ -458,3 +433,4 @@
   </script>
 </body>
 </html>
+
