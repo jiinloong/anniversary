@@ -398,8 +398,9 @@
               scanLocked = true;
               const scanned = result.getText();
               $("status").textContent = "[ou shi omgomgomg i found the barcode] " + scanned;
-              controls.stop();
-              scannerControls = null;
+              // Let openGift() stop the scanner through stopScanner().
+              // Calling the callback's controls.stop() here can fail if ZXing
+              // has not supplied that third callback argument.
               openGift(scanned);
             }
           }
@@ -433,4 +434,3 @@
   </script>
 </body>
 </html>
-
